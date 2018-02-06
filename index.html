@@ -1,0 +1,560 @@
+<html>
+<head>
+<title>ROBO PRACT</title>
+</head>
+<body>
+SOURCE CODE:-
+importch.aplu.robotsim.*;<br>
+
+classMovewithoutgears<br>
+
+{<br>
+
+Movewithoutgears ()<br>
+
+  {<br>
+
+TurtleRobot robot = new TurtleRobot();<br>
+
+robot.forward(100);<br>
+
+robot.left(90);<br>
+
+robot.forward(50);<br>
+
+robot.right(90);<br>
+
+robot.forward(50); <br>
+
+robot.exit();<br>
+
+  }<br>
+
+
+public static void main(String[] args)<br>
+
+  {<br>
+
+newMovewithoutgears ();<br>
+
+  }<br>
+
+2nd ass<br>
+
+<br>TITLE:Write a program in java to create a robot with gear and move it forward ,left ,right
+Program code:
+importch.aplu.robotsim.*;
+classMovewithgear
+{
+Movewithgear()
+{
+NxtRobot robot = new NxtRobot();
+Gear gear = new Gear();
+robot.addPart(gear);
+gear.forward(2000);
+gear.setSpeed(30);
+gear.left(480);
+gear.forward(2000);
+gear.right(480);
+gear.forward();
+// Tools.delay(2000);
+robot.exit();
+}
+public static void main(String[] args)
+{
+newMovewithgear();
+}
+}<br>
+
+3rd ass<br>
+<br>TITLE :Write a program to create a robot with two motors and move it forward, left,right.
+PROGRAM:-
+importch.aplu.robotsim.*;
+public class MovewithMotors
+{
+publicMovewithMotors ()
+{
+NxtRobot robot = new NxtRobot();
+Motor motA = new Motor(MotorPort.A);
+Motor motB = new Motor(MotorPort.B);
+robot.addPart(motA);
+robot.addPart(motB);
+motA.forward();
+motB.forward();
+Tools.delay(2000);
+motA.stop();
+Tools.delay(1050);
+motA.forward();
+Tools.delay(2000);
+motB.stop();
+Tools.delay(1050);
+motB.forward();
+Tools.delay(2000);
+robot.exit();
+}
+public static void main(String [] args)
+{
+newMovewithMotors ();
+}
+}
+
+<br>4th ass<br>
+
+<br>// LineFollower.java
+importch.aplu.robotsim.*;
+classLineFollower
+{
+LineFollower()
+{
+LegoRobot robot = new LegoRobot();
+Gear gear = new Gear();
+LightSensor ls = new LightSensor(SensorPort.S3);
+robot.addPart(gear);
+gear.setSpeed(20);
+robot.addPart(ls);
+while (true)
+{
+int v = ls.getValue();
+if (v &lt; 100) // black
+gear.forward();
+if (v &gt; 300 &amp;&amp; v &lt; 750) // blue
+gear.leftArc(0.05);
+if (v &gt; 800) // yellow
+gear.rightArc(0.05);
+}
+}
+public static void main(String[] args)
+{
+newLineFollower();
+}
+// -- -- -- -- -- Environment -- -- -- -- -- -- -- -- -- -- --
+static
+{
+RobotContext.setStartPosition(50, 490);
+RobotContext.setStartDirection(-90);
+RobotContext.useBackground(&quot;sprites/road.gif&quot;);
+}
+}
+
+5th ass<br>
+
+<br>importch.aplu.robotsim.*;
+classCirclem
+{
+Circlem()
+{
+NxtRobot robot = new NxtRobot();
+Gear gear = new Gear();
+robot.addPart(gear);
+gear.setSpeed(60);
+gear.leftArc(0.2,7000);
+gear.rightArc(0.2);
+Tools.delay(5000);
+robot.exit();
+}
+public static void main(String[] args)
+{
+newCirclem();
+}
+}<br>
+
+<br>6th ass
+
+<br>PathFinder.java
+importch.aplu.robotsim.*;
+public class PathFinder
+{
+publicPathFinder()
+{
+NxtRobot robot = new NxtRobot();
+Gear gear = new Gear();
+LightSensor ls1 = new LightSensor(SensorPort.S1); // right
+LightSensor ls2 = new LightSensor(SensorPort.S2); // left
+robot.addPart(gear);
+robot.addPart(ls1);
+robot.addPart(ls2);
+gear.forward();
+while (true)
+{
+intrightValue = ls1.getValue();
+intleftValue = ls2.getValue();
+int d = rightValue - leftValue;
+if (d &gt; 100) // left dark , turn right
+gear.rightArc(0.1);
+if (d &lt; -100) // right dark, turn left
+gear.leftArc(0.1);
+if (d &gt; -100 &amp;&amp; d &lt; 100 &amp;&amp;rightValue&gt; 500)
+gear.forward();
+}
+}
+public static void main(String[] args)
+{
+newPathFinder();
+}
+// -- -- -- -- -- -- -- -- -- Environment -- -- -- -- -- -- -- -- -- -- -- -- --
+static
+{
+NxtContext.setStartPosition(250, 490);
+NxtContext.setStartDirection(-90);
+NxtContext.useBackground(&quot;sprites/path.gif&quot;);
+}
+}<br>
+
+
+<br>7th ass<br>
+
+import java.util.*;
+import java.io.*;
+public class breadthfirst
+{
+ArrayList arr=new ArrayList();
+String str[]=new String[2];
+String path[]=new String[20];
+int i,j,k=0;
+public breadthfirst()
+{
+//Adding Name Of City To The Arraylist.
+arr.add(&quot;Arad&quot;);
+arr.add(&quot;Zerind&quot;);
+arr.add(&quot;Sibiu&quot;);
+arr.add(&quot;Timisoara&quot;);
+arr.add(&quot;Rimnicu Vilcea&quot;);
+arr.add(&quot;Fagaras&quot;);
+arr.add(&quot;Lugoj&quot;);
+arr.add(&quot;Craiova&quot;);
+arr.add(&quot;Pitesti&quot;);
+arr.add(&quot;Bucharest&quot;);
+arr.add(&quot;Mehadia&quot;);
+arr.add(&quot;Dobreta&quot;);
+arr.add(&quot;Pitesti&quot;);
+arr.add(&quot;Bucharest&quot;);
+arr.add(&quot;Dobreta&quot;);
+}
+public void breadth()
+{
+if(arr.isEmpty())
+System.out.println(&quot;Empty&quot;);
+for(i=0;i&lt;20;i++)
+path[i]=&quot;&quot;;
+str[0]=&quot;&quot;;
+str[1]=&quot;&quot;;
+//Representing Cities in the tree format.
+System.out.println(&quot;\t\t\tArad\n&quot;);
+System.out.println(&quot;Zerind\t\t\tSibiu\t\t\tTimisoara\n&quot;);
+System.out.println(&quot;\t\tRimnicu Vilcea Fagaras\tLugoj\n&quot;);
+System.out.println(&quot;\t\tCraiova Pitesti Bucharest\t Mehadia\n&quot;);
+System.out.println(&quot;\tDobreta Pitesti Bucharest\t\tDobreta\n&quot;);
+try
+{
+
+BufferedReader br=new BufferedReader(new
+
+InputStreamReader(System.in));
+
+System.out.println(&quot;Enter the initial node&quot;);
+str[0]=br.readLine();
+System.out.println(&quot;Enter the goal&quot;);
+str[1]=br.readLine();
+
+//To Find The Goal.
+if(arr.contains(str[1]))
+{
+System.out.println(&quot;Goal is found&quot;);
+//To Store the Entire Path from initial node to goal.
+
+for(j=arr.indexOf(str[0]);j&lt;=arr.indexOf(str[1]);j++)
+path[k]=arr.get(j).toString();
+k++;
+}
+}
+
+}
+catch(IOException e)
+{}
+System.out.print(&quot;Path is: &quot;);
+for(j=0;j&lt;k;j++)
+{
+System.out.print(path[j]);
+if(j!=k-1)
+System.out.print(&quot;-- &gt;&quot;);
+}
+}
+public static void main(String arg[])
+{
+breadthfirst b=new breadthfirst();
+b.breadth();
+}
+
+}
+***************************************************************************<br>
+
+
+8th ass<br>
+
+<br>import java.util.*;
+import java.io.*;
+public class depthfirst
+{
+ArrayList arr=new ArrayList();
+String str[]=new String[2];
+String path[]=new String[20];
+int i,j,k=0;
+public depthfirst()
+{
+//Adding Name Of City To The Arraylist.
+arr.add(&quot;Arad&quot;);
+arr.add(&quot;Zerind&quot;);
+arr.add(&quot;Sibiu&quot;);
+arr.add(&quot;Rimnicu Vilcea&quot;);
+arr.add(&quot;Craiova&quot;);
+arr.add(&quot;Dobreta&quot;);
+arr.add(&quot;Pitesti&quot;);
+arr.add(&quot;Pitesti&quot;);
+arr.add(&quot;Bucharest&quot;);
+arr.add(&quot;Fagaras&quot;);
+arr.add(&quot;Bucharest&quot;);
+arr.add(&quot;Timisoara&quot;);
+arr.add(&quot;Lugoj&quot;);
+arr.add(&quot;Mehadia&quot;);
+arr.add(&quot;Dobreta&quot;);
+
+
+}
+public void depthsearch()
+{
+if(arr.isEmpty())
+System.out.println(&quot;Empty&quot;);
+for(i=0;i&lt;20;i++)
+path[i]=&quot;&quot;;
+str[0]=&quot;&quot;;
+str[1]=&quot;&quot;;
+//Representing Cities in the tree format.
+System.out.println(&quot;\t\t\tArad\n&quot;);
+System.out.println(&quot;Zerind\t\t\tSibiu\t\t\tTimisoara\n&quot;);
+System.out.println(&quot;\t\tRimnicu Vilcea Fagaras\tLugoj\n&quot;);
+System.out.println(&quot;\t\tCraiova Pitesti Bucharest\t Mehadia\n&quot;);
+System.out.println(&quot;\tDobreta Pitesti Bucharest\t\tDobreta\n&quot;);
+try
+{
+BufferedReader br=new BufferedReader(new
+
+InputStreamReader(System.in));
+
+System.out.println(&quot;Enter the initial node&quot;);
+str[0]=br.readLine();
+System.out.println(&quot;Enter the goal&quot;);
+str[1]=br.readLine();
+if(arr.contains(str[1]))
+{
+System.out.println(&quot;Goal is found&quot;);
+//To Store the Entire Path from initial node to goal.
+
+for(j=arr.indexOf(str[0]);j&lt;=arr.indexOf(str[1]);j++)
+{
+path[k]=arr.get(j).toString();
+k++;
+}
+}
+
+}
+catch(IOException e)
+{}
+System.out.print(&quot;Path is: &quot;);
+for(j=0;j&lt;k;j++)
+{
+System.out.print(path[j]);
+if(j!=k-1)
+System.out.print(&quot;-- &gt;&quot;);
+}
+}
+public static void main(String arg[])
+{
+depthfirst b=new depthfirst();
+b.depthsearch();
+}
+
+}
+***************************************************************************<br>
+<br>ass9<br>
+<br>import java.util.*;
+import java.io.*;
+class Astar
+{
+String str[]=new String[2];
+String s1,s2=&quot;&quot;;
+int no,i,j,min=1,temp,k=0;
+String path[]=new String[50];
+public Astar()throws IOException
+{
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+System.out.print(&quot;Enter the initial node:-\n&quot;);
+str[0]=br.readLine();
+path[k]=str[0];
+System.out.print(&quot;Enter the Goal Node:-\n&quot;);
+str[1]=br.readLine();
+//Representing Cities in the tree format.
+System.out.println(&quot;\t\t\tArad\n&quot;);
+System.out.println(&quot;Zerind\t\t\tSibiu\t\t\tTimisoara\n&quot;);
+System.out.println(&quot;\tOradea\tRimnicu Vilcea Fagaras\tLugoj\n&quot;);
+System.out.println(&quot;\tCraiova Pitesti Bucharest\t Mehadia\n&quot;);
+System.out.println(&quot; Dobreta Pitesti Bucharest\t\t\tDobreta\n&quot;);
+//Expand the appropriate node according to their minimum value.
+while(!str[0].equals(str[1]))
+{
+System.out.print(s2);
+System.out.println(&quot;Enter the no. of node of&quot; +&quot; &quot;+ str[0] );
+s1=br.readLine();
+no=Integer.parseInt(s1);
+//System.out.println(no);
+String st[][]=new String[no][3];
+int arr[]=new int[no];
+System.out.println(&quot;Enter the successor nodes of&quot; +&quot; &quot;+ str[0]+&quot; &quot; +&quot;With their
+straight line distance to goal node h(n) and path cost from start node i.e. h(n) &quot;);
+
+for(i=0;i&lt;no;i++)
+{
+for(j=0;j&lt;3;j++)
+{
+st[i][j]=br.readLine();
+
+}
+}
+//For Storing the values h(n) &amp; f(n) of various node.
+for(i=0;i&lt;no;i++)
+{
+arr[i]=Integer.parseInt(st[i][1])+Integer.parseInt(st[i][2]);
+}
+//To find the minimum value of various node.
+for(i=0;i&lt;no;i++)
+{
+for(j=i+1;j&lt;no;j++)
+{
+if(arr[i]&lt;arr[j])
+{
+temp=arr[i];
+arr[j]=arr[j];
+arr[i]=temp;
+}
+else
+{
+temp=arr[i];
+arr[i]=arr[j];
+arr[j]=temp;
+}
+}
+}
+min=arr[0];
+//To find out the node name having minimum value.
+for(i=0;i&lt;no;i++)
+{
+if((Integer.parseInt(st[i][1])+Integer.parseInt(st[i][2]))==min)
+str[0]=st[i][0];
+s2=&quot;Node&quot;+&quot; &quot;+str[0]+&quot; &quot;+&quot;has smallest value therefore &quot;;
+}
+k++;
+path[k]=str[0];
+}
+System.out.println(&quot;The path from initial node to goal node is:&quot;);
+for(i=0;i&lt;k;i++)
+System.out.print(path[i]+&quot;-- -&gt;&quot;);
+System.out.print(str[1]);
+}
+public static void main(String arg[])throws IOException
+{
+Astar a=new Astar();
+}
+}
+<br> hill climbing 10<br>
+<br>import java.util.*;
+import java.io.*;
+class Hillclimbing
+{
+  String str[]=new String[2];
+  String s1,s2="";
+  int no,i,j,min=1,temp,k=0;
+  String path[]=new String[50];
+  public Hillclimbing()throws IOException
+  {
+     BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+     System.out.println("Enter the initial node:-\n");
+     str[0]=br.readLine();
+     path[k]=str[0];
+     System.out.println("Enter the Goal Node:-\n");
+     str[1]=br.readLine();
+     
+     //Expand the appropriate node according to their minimum value.
+     while(min>0)
+     {
+        System.out.print(s2);
+        System.out.println("Enter the no. of node of"+""+str[0]);
+        s1=br.readLine();
+        no=Integer.parseInt(s1);
+        //System.out.println(no);
+        String st[][]=new String[no][2];
+        int arr[]=new int[no];
+        System.out.println("Enter the successor nodes of"+""+str[0]+""+"With their straight line distance to goal node");
+        for(i=0;i<no;i++)
+        {
+          for(j=0;j<2;j++)
+          {
+            st[i][j]=br.readLine();
+          }
+        }
+        
+        //for storing the values of various node.
+        for(i=0;i<no;i++)
+        {
+          arr[i]=Integer.parseInt(st[i][1]);
+        }
+        
+        //To find the minimum value of various node.
+        for(i=0;i<no;i++)
+        {
+          for(j=1;j<no;j++)
+          {
+            if(arr[i]<arr[j])
+            {
+              temp=arr[i];
+              arr[i]=arr[j];
+              arr[i]=temp;
+            }
+            else
+            {
+              temp=arr[i];
+              arr[i]=arr[j];
+              arr[j]=temp;
+            }
+          }
+        }
+        min=arr[0];
+        
+        //To find out the node name having minimum value.
+        for(i=0;i<no;i++)
+        {
+          if(Integer.parseInt(st[i][1])==min)
+          str[0]=st[i][0];
+          
+          s2="Node"+""+str[0]+""+"has smallest value therefore ";
+        }
+         k++;
+         path[k]=str[0];
+     }
+     System.out.println("The path from initial node to goal node is:");
+     for(i=0;i<k;i++)
+     System.out.println(path[i]+"--->");
+     System.out.println(str[1]);
+     }
+        public static void main(String arg[])throws IOException
+        {
+          Hillclimbing h=new Hillclimbing();
+        }
+     }
+      
+
+
+
+<br>
+
+
+</body>
+</html>
